@@ -33,6 +33,13 @@ public class user {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	@Override
+	public String toString() {
+		return "user [name=" + name + ", age=" + age + ", address=" + address + "]";
+	}
+	
+	
 	
 	
 
