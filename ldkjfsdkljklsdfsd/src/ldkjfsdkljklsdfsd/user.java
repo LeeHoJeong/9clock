@@ -6,6 +6,9 @@ public class user {
 	private String age;
 	private String address;
 	private String askdjas;
+	
+	public user() {};
+	
 	public String getName() {
 		return name;
 	}
