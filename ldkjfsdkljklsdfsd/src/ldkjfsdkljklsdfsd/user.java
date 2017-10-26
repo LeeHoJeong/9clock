@@ -9,6 +9,10 @@ public class user {
 	public String getName() {
 		return name;
 	}
+	@Override
+	public String toString() {
+		return "user [name=" + name + ", age=" + age + ", address=" + address + ", askdjas=" + askdjas + "]";
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
