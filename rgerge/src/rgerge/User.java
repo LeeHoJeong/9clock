@@ -1,0 +1,7 @@
+package rgerge;
+
+public class User {
+
+	private String name;
+	
+}
