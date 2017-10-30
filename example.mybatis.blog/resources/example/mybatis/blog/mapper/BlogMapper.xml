@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="example.mybatis.blog.store.mapper.BlogMapper">
+	
+	<resultMap type="Blog" id="blogMap">
+		<id property="id" column="blog_id"/>
+		<result property="title" column="title"/>
+		<association property="author" column="author_id" select="example.mybatis.blog.store.mapper.AuthorMapper.findAuthor" javaType="Author" jdbcType="VARCHAR"/>
+		<collection property="posts" column="blog_id" ofType="Post" select="example.mybatis.blog.store.mapper.PostMapper.findPostsByBlogId" javaType="ArrayList" jdbcType="NUMERIC"/>
+	
+	</resultMap>
+	
+	<select id="findBlogByAuthorId" parameterType="string" resultMap="blogMap">
+		SELECT blog_id, title, author_id
+		FROM blog_tb
+		WHERE author_id = #{author}
+	</select>
+	
+	<select id="findBlogsByTitle" parameterType="string" resultMap="blogMap">
+		SELECT blog_id, title, author_id
+		FROM blog_tb
+		WHERE title = #{title}
+	</select> 
+	
+	<insert id="registBlog" parameterType="Blog" useGeneratedKeys="true" keyProperty="blog_id">
+		INSERT INTO blog_tb(blog_id, title, author_id)
+		VALUES(blog_seq.NEXTVAL, #{title}, #{author.id})
+	</insert>
+	
+	<update id="updateBlog" parameterType="Blog">
+		UPDATE blog_tb
+		SET title = #{title}
+		WHERE blog_id = #{id}
+	</update>
+	
+	<delete id="deleteBlog" parameterType="Blog">
+		DELETE FROM blog_tb
+		WHERE blog_id = #{id}
+	</delete>
+</mapper>
+
+
+
